@@ -3,9 +3,7 @@ variable "pscloud_company" {}
 
 variable "pscloud_vpc_id" {}
 
-variable "pscloud_public_subnets_ids" {}
-variable "pscloud_private_subnets_ids" {}
-
+variable "pscloud_subnets_ids" {}
 variable "pscloud_sec_gr" {}
 
 variable "pscloud_domain_name" {}

@@ -3,7 +3,7 @@ output "pscloud_lb_dns_name" {
 }
 
 output "pscloud_lb_zone_id" {
-  value       = aws_lb.pscloud-lb[*].zone_id
+  value       = aws_lb.pscloud-lb.zone_id
 }
 
 output "pscloud_lb_tg" {

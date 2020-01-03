@@ -2,7 +2,7 @@ resource "aws_lb" "pscloud-lb" {
   name                  = "${var.pscloud_company}-elb-${var.pscloud_env}"
   internal              = false
   load_balancer_type    = "application"
-  subnets               = var.pscloud_public_subnets_ids.*.id
+  subnets               = var.pscloud_subnets_ids
   security_groups       = [ var.pscloud_sec_gr ]
 
   enable_deletion_protection = false
@@ -19,7 +19,7 @@ resource "aws_lb_target_group" "pscloud-lb-tg" {
   vpc_id                = var.pscloud_vpc_id
 
   tags = {
-    Name                = "${var.pscloud_company}_elb_target_group_${var.pscloud_env}"
+    Name                = "${var.pscloud_company}_lb_target_group_${var.pscloud_env}"
   }
 }
 
@@ -58,3 +58,5 @@ resource "aws_lb_target_group_attachment" "pscloud-lb-tg-attachment" {
   target_id             = var.pscloud_ec2_ids[count.index]
   port                  = 80
 }
+
+#TODO: scaling policies
