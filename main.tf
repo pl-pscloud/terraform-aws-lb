@@ -27,8 +27,11 @@ resource "aws_lb_listener" "pscloud-lb-listener" {
   for_each = var.pscloud_ports
 
   load_balancer_arn = aws_lb.pscloud-lb.arn
-  port                  = each.value
+  port                  = split(",", each.value)[0]
   protocol              = each.key
+  certificate_arn       = split(",", each.value)[1]
+  ssl_policy            = split(",", each.value)[2]
+
 
   default_action {
     type                = "forward"
@@ -58,5 +61,3 @@ resource "aws_lb_target_group_attachment" "pscloud-lb-tg-attachment" {
   target_id             = var.pscloud_ec2_ids[count.index]
   port                  = 80
 }
-
-#TODO: scaling policies
