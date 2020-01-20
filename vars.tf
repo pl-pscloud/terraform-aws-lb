@@ -8,8 +8,6 @@ variable "pscloud_sec_gr" {}
 
 variable "pscloud_ec2_ids" {}
 
-//variable "pscloud_target_groups" {}
-
 variable "pscloud_target_groups" {
   type = list(object({
     index     = number
@@ -24,8 +22,13 @@ variable "pscloud_listeners" {
     tg_index    = number
     port        = number
     protocol    = string
-    cert_arn    = string
-    ssl_policy  = string
+  }))
+}
+
+variable "pscloud_certificates" {
+  type = list(object({
+    listener_index    = number
+    cert_arn          = string
   }))
 }
 

@@ -33,13 +33,18 @@ resource "aws_lb_listener" "pscloud-lb-listener" {
   load_balancer_arn = aws_lb.pscloud-lb.arn
   port                  = var.pscloud_listeners[count.index].port
   protocol              = var.pscloud_listeners[count.index].protocol
-  certificate_arn       = var.pscloud_listeners[count.index].cert_arn
-  ssl_policy            = var.pscloud_listeners[count.index].ssl_policy
 
   default_action {
     type                = "forward"
     target_group_arn    = aws_lb_target_group.pscloud-lb-tg[var.pscloud_listeners[count.index].tg_index].arn
   }
+}
+
+resource "aws_lb_listener_certificate" "pscloud-lb-certs" {
+  count                 = length(var.pscloud_certificates)
+
+  certificate_arn       = var.pscloud_certificates[count.index].cert_arn
+  listener_arn          = aws_lb_listener.pscloud-lb-listener[var.pscloud_certificates[count.index].listener_index].arn
 }
 
 resource "aws_lb_listener_rule" "pscloud-lb-listener-rule-redirect" {
