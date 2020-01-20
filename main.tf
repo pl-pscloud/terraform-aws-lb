@@ -33,6 +33,7 @@ resource "aws_lb_listener" "pscloud-lb-listener" {
   load_balancer_arn = aws_lb.pscloud-lb.arn
   port                  = var.pscloud_listeners[count.index].port
   protocol              = var.pscloud_listeners[count.index].protocol
+  certificate_arn       = var.pscloud_listeners[count.index].cert_arn
 
   default_action {
     type                = "forward"

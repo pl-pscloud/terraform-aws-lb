@@ -22,6 +22,7 @@ variable "pscloud_listeners" {
     tg_index    = number
     port        = number
     protocol    = string
+    cert_arn    = string
   }))
 }
 
