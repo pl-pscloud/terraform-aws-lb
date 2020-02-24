@@ -6,8 +6,6 @@ variable "pscloud_vpc_id" {}
 variable "pscloud_subnets_ids" {}
 variable "pscloud_sec_gr" {}
 
-variable "pscloud_ec2_ids" {}
-
 variable "pscloud_target_groups" {
   type = list(object({
     index     = number
@@ -47,8 +45,6 @@ variable "pscloud_listeners_forward_rules" {
   type = list(object({
     tg_index        = number
     li_index        = number
-    port            = number
-    protocol        = string
     host_header     = string
   }))
 }
