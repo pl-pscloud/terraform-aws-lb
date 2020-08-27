@@ -63,8 +63,9 @@ resource "aws_lb_listener_rule" "pscloud-lb-listener-rule-redirect" {
   }
 
   condition {
-    field                = "host-header"
-    values               = [ var.pscloud_listeners_redirect_rules[count.index].host_header ]
+    host_header {
+      values               = [ var.pscloud_listeners_redirect_rules[count.index].host_header ]
+    }
   }
 }
 
@@ -78,8 +79,9 @@ resource "aws_lb_listener_rule" "pscloud-lb-listener-rule-forward" {
   }
 
   condition {
-    field                = "host-header"
-    values               = [ var.pscloud_listeners_forward_rules[count.index].host_header ]
+    host_header {
+      values               = [ var.pscloud_listeners_forward_rules[count.index].host_header ]
+    }
   }
 }
 
