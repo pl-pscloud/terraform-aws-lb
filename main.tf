@@ -5,7 +5,9 @@ resource "aws_lb" "pscloud-lb" {
   subnets               = var.pscloud_subnets_ids
   security_groups       = [ var.pscloud_sec_gr ]
 
-  enable_deletion_protection = false
+  enable_deletion_protection = var.enable_deletion_protection
+
+  idle_timeout          = var.pscloud_idle_timeout
 
   tags = {
     Name                = "${var.pscloud_company}_elb_${var.pscloud_env}"

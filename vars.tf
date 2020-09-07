@@ -6,6 +6,9 @@ variable "pscloud_vpc_id" {}
 variable "pscloud_subnets_ids" {}
 variable "pscloud_sec_gr" {}
 
+variable "pscloud_idle_timeout" { default = 60 }
+variable "enable_deletion_protection" { default = false }
+
 variable "pscloud_target_groups" {
   type = list(object({
     index     = number
