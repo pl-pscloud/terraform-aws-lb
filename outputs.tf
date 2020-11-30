@@ -7,7 +7,7 @@ output "pscloud_lb_zone_id" {
 }
 
 output "pscloud_lb_tg_arns" {
-  value       = aws_lb_target_group.pscloud-lb-tg.*.arn
+  value       = aws_lb_target_group.pscloud-lb-tg
 }
 
 output "pscloud_lb_lsiteners" {

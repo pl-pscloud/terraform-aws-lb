@@ -10,46 +10,66 @@ variable "pscloud_idle_timeout" { default = 60 }
 variable "enable_deletion_protection" { default = false }
 
 variable "pscloud_target_groups" {
-  type = list(object({
-    index     = number
+  type = map(object({
+    index     = string
     name      = string
     protocol  = string
     port      = number
   }))
+  
+  default = {
+    
+  }
 }
 
 variable "pscloud_listeners" {
-  type = list(object({
-    tg_index    = number
+  type = map(object({
+    tg_index    = string
     port        = number
     protocol    = string
     cert_arn    = string
   }))
+  
+  default = {
+    
+  }
 }
 
 variable "pscloud_certificates" {
-  type = list(object({
-    listener_index    = number
+  type = map(object({
+    listener_index    = string
     cert_arn          = string
   }))
+  
+  default = {
+    
+  }
 }
 
 variable "pscloud_listeners_redirect_rules" {
-  type = list(object({
-    tg_index        = number
-    li_index        = number
+  type = map(object({
+    tg_index        = string
+    li_index        = string
     port            = number
     protocol        = string
     host_header     = string
   }))
+
+  default = {
+    
+  }
 }
 
 variable "pscloud_listeners_forward_rules" {
-  type = list(object({
-    tg_index        = number
-    li_index        = number
+  type = map(object({
+    tg_index        = string
+    li_index        = string
     host_header     = string
   }))
+
+  default = {
+
+  }
 }
 
 
