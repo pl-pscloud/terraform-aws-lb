@@ -1,6 +1,8 @@
 variable "pscloud_env" {}
 variable "pscloud_company" {}
 
+variable "pscloud_lb_type" { default = "application" }
+
 variable "pscloud_vpc_id" {}
 
 variable "pscloud_subnets_ids" {}

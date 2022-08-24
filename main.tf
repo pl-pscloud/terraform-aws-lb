@@ -1,7 +1,7 @@
 resource "aws_lb" "pscloud-lb" {
   name                  = "${var.pscloud_company}-elb-${var.pscloud_env}"
   internal              = false
-  load_balancer_type    = "application"
+  load_balancer_type    = var.pscloud_lb_type
   subnets               = var.pscloud_subnets_ids
   security_groups       = [ var.pscloud_sec_gr ]
 
