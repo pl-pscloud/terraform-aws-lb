@@ -7,7 +7,7 @@ output "pscloud_alb_zone_id" {
 }
 
 output "pscloud_alb_id" {
-  value       = var.pscloud_lb_type == "application" ? aws_alb.pscloud-alb[0].id : null
+  value       = var.pscloud_lb_type == "application" ? aws_lb.pscloud-alb[0].id : null
 }
 
 output "pscloud_nlb_dns_name" {
