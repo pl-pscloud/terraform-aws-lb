@@ -47,7 +47,7 @@ resource "aws_lb_target_group" "pscloud-lb-tg" {
 resource "aws_lb_listener" "pscloud-lb-listener" {
   for_each              = var.pscloud_listeners
 
-  load_balancer_arn     = var.pscloud_lb_type == "application" ? aws_lb.pscloud-alb.arn : aws_lb.pscloud-nlb.arn
+  load_balancer_arn     = var.pscloud_lb_type == "application" ? aws_lb.pscloud-alb[0].arn : aws_lb.pscloud-nlb[0].arn
   port                  = each.value.port
   protocol              = each.value.protocol
   certificate_arn       = each.value.cert_arn
