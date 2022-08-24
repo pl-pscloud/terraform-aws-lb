@@ -1,10 +1,27 @@
-resource "aws_lb" "pscloud-lb" {
+resource "aws_lb" "pscloud-alb" {
+  count                 = var.pscloud_lb_type == "application" ? 1 : 0
   name                  = "${var.pscloud_company}-elb-${var.pscloud_env}"
   internal              = false
   load_balancer_type    = var.pscloud_lb_type
   subnets               = var.pscloud_subnets_ids
   security_groups       = [ var.pscloud_sec_gr ]
 
+  enable_deletion_protection = var.enable_deletion_protection
+
+  idle_timeout          = var.pscloud_idle_timeout
+
+  tags = {
+    Name                = "${var.pscloud_company}_elb_${var.pscloud_env}"
+  }
+}
+
+resource "aws_lb" "pscloud-nlb" {
+  count                 = var.pscloud_lb_type == "network" ? 1 : 0
+  name                  = "${var.pscloud_company}-elb-${var.pscloud_env}"
+  internal              = false
+  load_balancer_type    = var.pscloud_lb_type
+  subnets               = var.pscloud_subnets_ids
+  
   enable_deletion_protection = var.enable_deletion_protection
 
   idle_timeout          = var.pscloud_idle_timeout
@@ -30,7 +47,7 @@ resource "aws_lb_target_group" "pscloud-lb-tg" {
 resource "aws_lb_listener" "pscloud-lb-listener" {
   for_each              = var.pscloud_listeners
 
-  load_balancer_arn = aws_lb.pscloud-lb.arn
+  load_balancer_arn     = var.pscloud_lb_type == "application" ? aws_lb.pscloud-alb.arn : aws_lb.pscloud-nlb.arn
   port                  = each.value.port
   protocol              = each.value.protocol
   certificate_arn       = each.value.cert_arn
