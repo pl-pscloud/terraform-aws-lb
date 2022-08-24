@@ -1,9 +1,25 @@
-output "pscloud_lb_dns_name" {
-  value       = var.pscloud_lb_type == "application" ? aws_lb.pscloud-alb[0].dns_name : aws_lb.pscloud-nlb[0].dns_name
+output "pscloud_alb_dns_name" {
+  value       = var.pscloud_lb_type == "application" ? aws_lb.pscloud-alb[0].dns_name : null
 }
 
-output "pscloud_lb_zone_id" {
-  value       = var.pscloud_lb_type == "application" ? aws_lb.pscloud-alb[0].zone_id : aws_lb.pscloud-nlb[0].zone_id
+output "pscloud_alb_zone_id" {
+  value       = var.pscloud_lb_type == "application" ? aws_lb.pscloud-alb[0].zone_id : null
+}
+
+output "pscloud_alb_id" {
+  value       = var.pscloud_lb_type == "application" ? aws_alb.pscloud-alb[0].id : null
+}
+
+output "pscloud_nlb_dns_name" {
+  value       = var.pscloud_lb_type == "network" ? aws_lb.pscloud-nlb[0].dns_name : null
+}
+
+output "pscloud_nlb_zone_id" {
+  value       = var.pscloud_lb_type == "network" ? aws_lb.pscloud-nlb[0].zone_id : null
+}
+
+output "pscloud_nlb_id" {
+  value       = var.pscloud_lb_type == "network" ? aws_lb.pscloud-nlb[0].id : null
 }
 
 output "pscloud_lb_tg_arns" {
@@ -12,8 +28,4 @@ output "pscloud_lb_tg_arns" {
 
 output "pscloud_lb_lsiteners" {
   value       = aws_lb_listener.pscloud-lb-listener
-}
-
-output "pscloud_lb_id" {
-  value       = var.pscloud_lb_type == "application" ? aws_alb.pscloud-alb[0].id : aws_alb.pscloud-nlb[0].id
 }
